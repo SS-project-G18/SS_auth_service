@@ -16,8 +16,8 @@ def register_user(input: UserRegistrationInput):
         raise HTTPException(400, "User with given credentials exists")
     model = User(**input.__dict__)
     model.password = argon2.using(rounds=4).hash(model.password)
-    model.user_id==uuid4()
-    model.role_type=="User"
+    model.user_id=uuid4().__str__()
+    model.role_type="User"
     model.registration_date=datetime.utcnow()
     add_user(model)
     return JSONResponse("Success")

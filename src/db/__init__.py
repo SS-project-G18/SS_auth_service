@@ -6,3 +6,4 @@ client_string = "mongodb://"+os.environ.get("MONGO_USER_ID")+":" + os.environ.ge
 client = MongoClient(client_string)
 webapp = client.WebApp
 users_db = webapp.users
+session_db = webapp.session
