@@ -14,18 +14,6 @@ env:
   IMAGE: auth
 
 jobs:
-name: Python application
-
-on:
-  push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
-
-permissions:
-  contents: read
-
-jobs:
   setup-build-publish-deploy:
     name: Install Dependencies, Lint, Run Pytests, Build docker image, push it to a container register and deploy the image to GKE
     runs-on: ubuntu-latest
@@ -38,6 +26,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
