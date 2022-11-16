@@ -1,4 +1,4 @@
-name: Build and Deploy to GKEx
+name: Build and Deploy to GKE
 
 on:
   push:
@@ -29,11 +29,11 @@ jobs:
     # Configure Workload Identity Federation and generate an access token.
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v0.4.0'
+      uses: 'google-github-actions/auth@v0'
       with:
-        token_format: 'access_token'
+        #token_format: 'access_token'
         workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-        service_account: 'my-service-account@123456789.iam.gserviceaccount.com'
+        service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -49,8 +49,8 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Check
-      run: echo ${{steps.auth.outputs.access_token}}
+
+
 
     - name: Docker configuration
       run: |-
