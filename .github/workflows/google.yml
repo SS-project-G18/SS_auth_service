@@ -7,9 +7,9 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GAR_LOCATION: us-central1
-  GKE_CLUSTER: cluster-1    
-  GKE_ZONE: us-central1-c  
+  GAR_LOCATION: asia-south1
+  GKE_CLUSTER: ss-cluster    
+  GKE_ZONE: asia-south1-a  
   DEPLOYMENT_NAME: auth 
   REPOSITORY: auth 
   IMAGE: auth
