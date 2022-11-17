@@ -35,7 +35,7 @@ jobs:
       with:
         token_format: 'access_token'
         workload_identity_provider: 'projects/870596430923/locations/global/workloadIdentityPools/ss-pool/providers/ss-provider'
-        service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
+        service_account: 'scalable-services@my-project.iam.gserviceaccount.com'
 
     # Alternative option - authentication via credentials json
     # - id: 'auth'
