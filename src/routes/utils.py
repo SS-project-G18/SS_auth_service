@@ -31,12 +31,19 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
+    credentials_expire = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Token is invalid or expired",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
     try:
         payload = jwt.decode(token, os.environ.get("JWT_SECRET"), algorithms=["HS256"])
-        username: str = payload.get("user_id")
+        username = payload.get("user_id")
         if username is None:
             raise credentials_exception
-    except Exception:
+    except jwt.exceptions.ExpiredSignatureError as e:
+        raise credentials_expire
+    except Exception as e:
         raise credentials_exception
     user = get_user_with_id(user_id=username)
     if user is None:

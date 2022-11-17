@@ -19,3 +19,11 @@ def get_user_with_id(user_id):
 def db_get_all_users():
     res = users_db.find({})
     return [UserResponse.parse_obj(x) for x in res]
+
+def db_update_user_password(user_id, new_pass):
+    users_db.update_one({"user_id": user_id}, {
+        "$set": {
+            "password": new_pass
+        }
+    })
+    

@@ -22,3 +22,9 @@ class UserResponse(UserBasic):
     registration_date: str = ""
     role_type: str = ""
     
+class UserInfo(UserBasic):
+    registration_date: str = ""
+    role_type: str = ""
+    
+class UserPasswordUpdate(BasicModel):
+    password: str = ""
